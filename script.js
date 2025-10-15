@@ -9,7 +9,7 @@ canvas.height = window.innerHeight;
 const letters = "アァカサタナハマヤャラワン0123457890ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 // size of each character and how many columns fit across
-const fontSize = 16;
+const fontSize = 18;
 const columns = Math.floor(canvas.width / fontSize);
 
 // an array that tracks the y-position of each column
