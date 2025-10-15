@@ -47,3 +47,21 @@ window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 });
+
+// typing effect for the tagline
+const tagline = document.getElementById("tagline");
+const fullText = ">> initializing...";
+let index = 0;
+
+function typeEffect() {
+    if (index < fullText.length) {
+        tagline.textContent = fullText.slice(0, index + 1);
+        index++;
+        setTimeout(typeEffect, 120); // typing speed (ms per character)
+    } else {
+        // Optional: make the cursor blink after finishing
+        tagline.classList.add("blink");
+    }
+}
+
+typeEffect();

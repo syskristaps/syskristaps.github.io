@@ -94,8 +94,13 @@ body::before {
   background: transparent; /* so our black body background shows */
 }
 
-.github {
-    margin: 20px;
-    text-decoration-style: none;
-    color: var(--matrix-green);
+.blink::after {
+  content: "_";
+  animation: blink 0.8s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
 }
