@@ -93,3 +93,9 @@ body::before {
   display: block;
   background: transparent; /* so our black body background shows */
 }
+
+.github {
+    margin: 20px;
+    text-decoration-style: none;
+    color: var(--matrix-green);
+}
