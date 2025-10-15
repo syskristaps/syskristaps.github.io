@@ -48,20 +48,53 @@ window.addEventListener("resize", () => {
     canvas.height = window.innerHeight;
 });
 
-// typing effect for the tagline
+// --- Typing effect with final "system ready." message ---
 const tagline = document.getElementById("tagline");
-const fullText = ">> initializing...";
-let index = 0;
+const messages = [
+  ">> initializing...",
+  ">> loading kernel...",
+  ">> decrypting matrix...",
+  ">> system ready..."
+];
 
-function typeEffect() {
-    if (index < fullText.length) {
-        tagline.textContent = fullText.slice(0, index + 1);
-        index++;
-        setTimeout(typeEffect, 120); // typing speed (ms per character)
+let messageIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function type() {
+  const current = messages[messageIndex];
+  const displayed = current.slice(0, charIndex);
+  tagline.textContent = displayed;
+
+  if (!isDeleting) {
+    // typing forward
+    if (charIndex < current.length) {
+      charIndex++;
+      setTimeout(type, 100);
     } else {
-        // Optional: make the cursor blink after finishing
+      // pause before deleting or moving to next message
+      if (messageIndex < messages.length - 1) {
+        setTimeout(() => {
+          isDeleting = true;
+          type();
+        }, 1000);
+      } else {
+        // last message reached — stop typing and blink cursor
         tagline.classList.add("blink");
+      }
     }
+  } else {
+    // deleting backward
+    if (charIndex > 0) {
+      charIndex--;
+      setTimeout(type, 50);
+    } else {
+      // move to next message
+      isDeleting = false;
+      messageIndex++;
+      setTimeout(type, 500);
+    }
+  }
 }
 
-typeEffect();
+type();
